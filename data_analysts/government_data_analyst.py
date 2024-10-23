@@ -1,5 +1,5 @@
-from .data_analyst import DataAnalyst
-from data_collector import GovernmentDataCollector
+from data_analysts.data_analyst import DataAnalyst
+from data_collectors import GovernmentDataCollector
 
 
 class GovernmentDataAnalyst(DataAnalyst):

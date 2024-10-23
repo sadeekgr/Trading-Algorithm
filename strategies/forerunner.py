@@ -1,5 +1,5 @@
-from .stategy import Strategy
-from data_analyst import GovernmentDataAnalyst
+from strategy import Strategy
+from data_analysts import GovernmentDataAnalyst
 
 
 class Forerunner(Strategy):

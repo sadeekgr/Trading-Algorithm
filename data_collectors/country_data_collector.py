@@ -1,6 +1,6 @@
-from .data_collector import DataCollector
+from data_collectors.data_collector import DataCollector
 
-class GovernmentDataCollector(DataCollector):
+class CountryDataCollector(DataCollector):
     def __init__(self):
         super().__init__()
 
