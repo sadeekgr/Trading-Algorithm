@@ -1,6 +1,6 @@
 from data_collectors.data_collector import DataCollector
 
-class CountryDataCollector(DataCollector):
+class CompanyDataCollector(DataCollector):
     def __init__(self):
         super().__init__()
 

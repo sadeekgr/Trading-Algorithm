@@ -1,5 +1,5 @@
 from strategy import Strategy
-from data_analysts import GovernmentDataAnalyst, CountryDataAnalyst
+from data_analysts import GovernmentDataAnalyst, CountryDataAnalyst, CompanyDataAnalyst, MarketDataAnalyst
 
 
 class Forerunner(Strategy):
@@ -7,7 +7,9 @@ class Forerunner(Strategy):
         if analysts == None:
             analysts = {
                 "government": GovernmentDataAnalyst(),
-                "country": CountryDataAnalyst
+                "country": CountryDataAnalyst(),
+                "company": CompanyDataAnalyst(),
+                "market": MarketDataAnalyst()
             }
         super().__init__(analysts)
 

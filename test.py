@@ -13,10 +13,10 @@ tv_username = secret_codes["TradingView username"]
 tv_password = secret_codes["TradingView password"]
 
 
-symbol = 'AAPL'
-exchange = 'NASDAQ'
-start = datetime(year=2024, month=10, day=23, hour=12, minute=12, second=29)
-end = datetime(year=2024, month=10, day=23, hour=18, minute=2, second=20)
+symbol = 'SOC.WS'
+exchange = 'NYSE'
+start = datetime(year=2022, month=10, day=24, hour=0, minute=0, second=0)
+end = datetime(year=2023, month=10, day=19, hour=0, minute=0, second=0)
 num_bars_needed = 5
 client = StockHistoricalDataClient(API_KEY, API_SECRET_KEY)
 request_params = StockBarsRequest(

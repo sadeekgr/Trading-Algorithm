@@ -7,6 +7,11 @@ class GovernmentDataAnalyst(DataAnalyst):
         if government_data_collector == None:
             government_data_collector = GovernmentDataCollector()
         super().__init__(government_data_collector)
+        self.indicators = {
+            # government bonds
+            # central bank reserves
+        }
+
         pass
 
     def analyze_data(self):
