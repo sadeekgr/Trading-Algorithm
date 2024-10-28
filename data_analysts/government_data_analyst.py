@@ -9,9 +9,10 @@ class GovernmentDataAnalyst(DataAnalyst):
         super().__init__(government_data_collector)
         self.indicators = {
             # government bonds
+            # foreign credit rating
             # central bank reserves
+            # inflation
         }
-
         pass
 
     def analyze_data(self):

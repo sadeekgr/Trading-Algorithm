@@ -21,8 +21,8 @@ class MarketDataAnalyst(DataAnalyst):
             # Bollinger Bands
             #'RSI': {14: None},
             # pre and after market price action
+            # analyze time of day (sleep, breakfast, after work)
         }
-
         pass
 
     def load_indicators_historical_market_data(self, csv_path):
