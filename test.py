@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import json
 import os
+from finvizfinance.quote import Statements, finvizfinance
 from alpaca.data import TimeFrame, StockHistoricalDataClient, StockLatestTradeRequest, StockLatestQuoteRequest, StockBarsRequest
 from secret_codes import secret_codes
 from tvDatafeed import TvDatafeed, Interval
@@ -15,6 +16,9 @@ tv_password = secret_codes["TradingView password"]
 
 symbol = 'SOC.WS'
 exchange = 'NYSE'
+stock = finvizfinance("AAPL")
+data = stock.ticker_full_info()
+print(data)
 start = datetime(year=2022, month=10, day=24, hour=0, minute=0, second=0)
 end = datetime(year=2023, month=10, day=19, hour=0, minute=0, second=0)
 num_bars_needed = 5

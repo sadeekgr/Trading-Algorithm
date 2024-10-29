@@ -1,8 +1,9 @@
 from data_analysts.data_analyst import DataAnalyst
 from data_collectors import CompanyDataCollector
 
-#yfinance, yahooquery
+#yfinance, yahooquery, financialmodelingprep, finvizfinance
 class CompanyDataAnalyst(DataAnalyst):
+    # quarterly reports are unaudited, so annual ones hold far more weight, 8k are for important events
     def __init__(self, company_data_collector=None):
         if company_data_collector == None:
             company_data_collector = CompanyDataCollector()
@@ -13,9 +14,6 @@ class CompanyDataAnalyst(DataAnalyst):
             # FCF Conversion
             # KPI
             # Revenue characteristics (contractual, recurrning, seasonal)
-            # 10k report
-            # quarterly report
-            # 8k filings
             # capital structure
             # net capital employed
             # net invested capital
@@ -62,7 +60,6 @@ class CompanyDataAnalyst(DataAnalyst):
             # Peak Lood Pricing
             # Ror-Aj Model
         }
-        pass
 
     def analyze_data(self):
         pass

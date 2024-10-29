@@ -72,8 +72,8 @@ class MarketDataCollector(DataCollector):
         active_securities_data_url = "https://paper-api.alpaca.markets/v2/assets?status=active&attributes="
         active_securities_data_dict = json.loads(requests.get(active_securities_data_url, headers=headers).text)
         stocks_data_dict = [
-            {'symbol': entry['symbol'], 'exchange': entry['exchange'], 'name': entry['name'], 'class': entry['class']} for entry in active_securities_data_dict
-            if entry['tradable'] == True and entry['class'] == 'us_equity' and entry['exchange'] != 'BATS']
+            {'symbol': entry['symbol'], 'exchange': entry['exchange'], 'name': entry['name']} for entry in active_securities_data_dict
+            if entry['tradable'] == True and entry['class'] == 'us_equity' and entry['exchange'] != 'BATS'] # TO UPDATE, only consider companies that have financial statements
         if historical:
             for stock_dict in stocks_data_dict:
                 try: # TO UPDATE, random days and periods used temporarily
