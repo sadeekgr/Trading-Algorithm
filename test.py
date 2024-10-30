@@ -1,9 +1,7 @@
 from datetime import datetime, timedelta
-import time
+import time, re, requests, json, os
 import pandas as pd
-import requests
-import json
-import os
+from bs4 import BeautifulSoup
 from finvizfinance.quote import Statements, finvizfinance
 from alpaca.data import TimeFrame, StockHistoricalDataClient, StockLatestTradeRequest, StockLatestQuoteRequest, StockBarsRequest
 from secret_codes import secret_codes

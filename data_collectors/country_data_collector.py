@@ -1,5 +1,6 @@
 from data_collectors.data_collector import DataCollector
 
+
 class CountryDataCollector(DataCollector):
     def __init__(self):
         super().__init__()
@@ -12,3 +13,7 @@ class CountryDataCollector(DataCollector):
 
     def load_data(self):
         pass
+
+
+if __name__ == '__main__':
+    pass

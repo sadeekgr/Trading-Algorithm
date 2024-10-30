@@ -1,8 +1,5 @@
-import json
-import os.path
-import pandas as pd
-import requests
-from finvizfinance.quote import Statements, finvizfinance
+import json, os, requests, pandas as pd
+from finvizfinance.quote import Statements
 from data_collectors.data_collector import DataCollector
 from secret_codes import secret_codes
 ALPACA_API_KEY = secret_codes["Alpaca API Key"]
@@ -65,5 +62,7 @@ class CompanyDataCollector(DataCollector):
     def load_data(self):
         pass
 
-cm = CompanyDataCollector()
-cm.get_data()
+
+if __name__ == '__main__':
+    cm = CompanyDataCollector()
+    dd = cm.get_data()

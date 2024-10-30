@@ -1,8 +1,5 @@
-import requests
-import json
-import os
+import requests, json, os, pandas as pd
 from math import ceil
-import pandas as pd
 from alpaca.data import StockHistoricalDataClient, StockBarsRequest, TimeFrame
 from tvDatafeed import TvDatafeed, Interval
 from data_collector import DataCollector
@@ -163,13 +160,10 @@ class MarketDataCollector(DataCollector):
         return historical_market_data
 
     def load_market_data_csv(self, csv_file_path):
-        data = super().load_data_csv(csv_file_path)
-        data.set_index('symbol', inplace=True)
-        return data
+        return super().load_data_csv(csv_file_path, 'symbol')
 
     def load_historical_market_data_csv(self, csv_file_path):
-        # TO UPDATE
-        return
+        return super().load_data_csv(csv_file_path, 'timestamp')
 
 
 if __name__ == "__main__":
