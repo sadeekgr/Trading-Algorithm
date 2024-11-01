@@ -11,7 +11,9 @@ API_SECRET_KEY = secret_codes["Alpaca API Secret Key"]
 tv_username = secret_codes["TradingView username"]
 tv_password = secret_codes["TradingView password"]
 
-
+import talib
+print(dir(talib))
+o = talib.EMA()
 symbol = 'SOC.WS'
 exchange = 'NYSE'
 stock = finvizfinance("AAPL")

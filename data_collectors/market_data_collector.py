@@ -2,7 +2,7 @@ import requests, json, os, pandas as pd
 from math import ceil
 from alpaca.data import StockHistoricalDataClient, StockBarsRequest, TimeFrame
 from tvDatafeed import TvDatafeed, Interval
-from data_collector import DataCollector
+from data_collectors.data_collector import DataCollector
 from secret_codes import secret_codes
 ALPACA_API_KEY = secret_codes["Alpaca API Key"]
 ALPACA_API_SECRET_KEY = secret_codes["Alpaca API Secret Key"]
@@ -45,6 +45,7 @@ time_letter_to_tv_interval = {
     (1, "Week"): Interval.in_weekly,
     (1, "Month"): Interval.in_monthly
 }
+# bittrex for crypto
 
 
 class MarketDataCollector(DataCollector):
@@ -163,7 +164,10 @@ class MarketDataCollector(DataCollector):
         return super().load_data_csv(csv_file_path, 'symbol')
 
     def load_historical_market_data_csv(self, csv_file_path):
-        return super().load_data_csv(csv_file_path, 'timestamp')
+        data = super().load_data_csv(csv_file_path, 'timestamp')
+        data.index = pd.to_datetime(data.index)
+        return data
+
 
 
 if __name__ == "__main__":

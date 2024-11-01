@@ -8,6 +8,7 @@ class GovernmentDataAnalyst(DataAnalyst):
             government_data_collector = GovernmentDataCollector()
         super().__init__(government_data_collector)
         self.indicators = {
+            # investment into research
             # government bonds, https://tradingeconomics.com/bonds
             # foreign credit rating's rate of change
         }

@@ -25,7 +25,7 @@ class CompanyDataAnalyst(DataAnalyst):
             # ROI
             # Net Profit Margin
             # preferred(?) dividends (Payout Ratio (?))
-            # sustainability growth rate = ROE*(1-Payout Ratio)
+            # sustainability growth rate = ROE * (1 - Payout Ratio)
             # ROA (Return on assets)
             # ROCE (Return on capital employed) = EBIT / (Avg. Shareholders' Equity + Avg. Long Term Debt)
             # Operating Profit Margin
@@ -63,3 +63,7 @@ class CompanyDataAnalyst(DataAnalyst):
 
     def analyze_data(self):
         pass
+
+
+if __name__ == '__main__':
+    pass
