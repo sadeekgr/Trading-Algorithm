@@ -24,6 +24,7 @@ class MarketDataAnalyst(DataAnalyst):
             'support': [43, 177, 599], # strenght proportional to volume and difference between close and low, should divide price in bands whose width is 0.1% of curr price
             'resistance': [43, 177, 599], # strenght proportional to volume and difference between high and close, should divide price in bands whose width is 0.1% of curr price
             # inclined support and resistance are caused by market orders (they are a 'perceived' resistance and support), horizontal are caused by limit orders (they usually represent 'actual' support and resistance, should be stronger as they might be bulk orders from companies)
+            # price moves up / down while index does opposite
             # maybe consider with what angle the EMA intersects the RMAs
             # average up / down movement's duration and speed calculated through ROC
             # consider change in num of shares (use an average share count?)

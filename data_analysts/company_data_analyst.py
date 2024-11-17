@@ -19,7 +19,6 @@ class CompanyDataAnalyst(DataAnalyst):
             # net invested capital
             # net equity
             # Insider Transaction (IMPORTANT)
-            # Dollar cost average
             # ROE = [ROI + (Debt / Equity) * (ROI - Cost of Debt)] * fiscal and discounting operations index
             # fiscal and discounting operations index = Net Profit / Profit before taxes from continuing operations
             # ROI
@@ -36,7 +35,6 @@ class CompanyDataAnalyst(DataAnalyst):
             # EPS (average earnings per share) = (Net income - pref. dividends) / num of shares, consider change in num of shares (use an average share count?)
             # CUSTOM: net-income (or equivalent) / (assets + running costs), take into account how much it borrowed as it can increase net-income, how efficiently uses assets to generate income (especially useful for smaller companies)
             # (EPS2 * period2 - EPS1 * period1) / (period1 + period2), average perceived EPS increase rate with linear weight to period
-            # EPS2 * e^(period2 / (period1 + period2))
             # Price to Earnings = Share Price / EPS = Market Capitalization / Net income
             # Enterprise value to EBIT = (Market Capitalization + Total Debt - Cash) / EBIT
             # Enterprise value to sales = (Market Capitalization + Total Debt - Cash) / Revenues
@@ -50,11 +48,8 @@ class CompanyDataAnalyst(DataAnalyst):
             # short-term-debt-coverage = CFFO (Cash Flow from Operations) / Current Financial Debt
             # CAPEX
             # CAPEX-Coverage-Ratio
-            # simple interest law
-            # zero coupon bonds
-            # spot interest rates and spot prices
-            # pp curve
-            # markup
+            # pp curve (trade-offs between the production of two goods; if an economy decides to produce more of one good, it will have to produce less of the other due to limited resources)
+            # markup (of a product) = selling price - cost of production
             # extensive and intensive margin
             # Ramsey Boiteux Pricing model
             # Peak Lood Pricing

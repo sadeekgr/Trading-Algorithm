@@ -74,7 +74,7 @@ class MarketDataCollector(DataCollector):
             if entry['tradable'] == True and entry['class'] == 'us_equity' and entry['exchange'] != 'BATS'] # TO UPDATE, only consider companies that have financial statements
         if historical:
             for stock_dict in stocks_data_dict:
-                try: # TO UPDATE, random days and periods used temporarily
+                try: # TO UPDATE, random days and periods hardcoded temporarily
                     end = pd.Timestamp.now()
                     start = end-pd.Timedelta(days=4)
                     self.get_historical_data(stock_dict['symbol'], stock_dict["exchange"], interval=(1, "Min"), start=start, end=end)
@@ -103,7 +103,7 @@ class MarketDataCollector(DataCollector):
                     continue
         return pd.DataFrame(stocks_data_dict)
 
-    def fetch_crypto_data(self, historical=False) -> pd.DataFrame: # TO UPDATE, returns crypto, use binance or else for this(?)
+    def fetch_crypto_data(self, historical=False) -> pd.DataFrame: # TO UPDATE, returns crypto data, use binance or else for this(?)
         if historical:
             pass
         return pd.DataFrame([{'symbol': 'XMR/USD', 'name': 'Monero to USD', 'class': 'crypto'}])
@@ -119,7 +119,7 @@ class MarketDataCollector(DataCollector):
         historical_market_data.to_csv(f"{folder_path}/{symbol}_{exchange}_historical_market_data.csv")
         return historical_market_data
 
-    def fetch_historical_data(self, symbol, exchange, interval, start, end=pd.Timestamp.now()):
+    def fetch_historical_data(self, symbol, exchange, interval, start, end=pd.Timestamp.now()):  # TO UPDATE, add functionality to only get required data by checking the cvs files
         difference = pd.Timestamp.now() - start
         seconds_difference = difference.total_seconds()
         num_bars_needed = ceil(seconds_difference / (interval[0]*time_letter_to_seconds[interval[1]]))
@@ -153,7 +153,7 @@ class MarketDataCollector(DataCollector):
                 historical_market_data_alpaca.index = historical_market_data_alpaca.index.droplevel('symbol')
                 historical_market_data_alpaca.index = historical_market_data_alpaca.index.tz_localize(None)
                 historical_market_data_alpaca.index.name = 'timestamp'
-                # TO UPDATE, technically, you should aggregate historical_market_data_alpaca if you inputted 3 Min, 4 Hours etc. instead of 1 Min, 1 Hour etc.
+                # TO UPDATE, need aggregate historical_market_data_alpaca if you inputted 3 Min, 4 Hours etc. instead of 1 Min, 1 Hour etc.
             except KeyError:
                 print(f"Alpaca does not support historical data of {symbol} in exchange {exchange}")
                 raise KeyError
