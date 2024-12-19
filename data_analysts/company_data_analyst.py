@@ -22,6 +22,7 @@ class CompanyDataAnalyst(DataAnalyst):
             # ROE = [ROI + (Debt / Equity) * (ROI - Cost of Debt)] * fiscal and discounting operations index
             # fiscal and discounting operations index = Net Profit / Profit before taxes from continuing operations
             # ROI
+            # Cap Rate = NOI or Cash Flow / Value of Asset
             # Net Profit Margin
             # preferred(?) dividends (Payout Ratio (?))
             # sustainability growth rate = ROE * (1 - Payout Ratio)
@@ -29,10 +30,10 @@ class CompanyDataAnalyst(DataAnalyst):
             # ROCE (Return on capital employed) = EBIT / (Avg. Shareholders' Equity + Avg. Long Term Debt)
             # Operating Profit Margin
             # Asset Turnover Ratio = Revenues / Total Assets
-            # EBITDA Margin
+            # EBITDA Margin = (EBITDA / Revenue) * 100
             # Quality of Operating Earnings = CFFO / EBIT
             # consider change in num of shares (use an average share count?)
-            # EPS (average earnings per share) = (Net income - pref. dividends) / num of shares, consider change in num of shares (use an average share count?)
+            # EPS (average earnings per share) = (Net income - pref. dividends) / num of shares, consider change in num of shares (use an average share count?) (By reducing the number of outstanding shares, buybacks increase earnings per share (EPS), which often boosts the stock price.)
             # CUSTOM: net-income (or equivalent) / (assets + running costs), take into account how much it borrowed as it can increase net-income, how efficiently uses assets to generate income (especially useful for smaller companies)
             # (EPS2 * period2 - EPS1 * period1) / (period1 + period2), average perceived EPS increase rate with linear weight to period
             # Price to Earnings = Share Price / EPS = Market Capitalization / Net income
@@ -54,6 +55,9 @@ class CompanyDataAnalyst(DataAnalyst):
             # Ramsey Boiteux Pricing model
             # Peak Lood Pricing
             # Ror-Aj Model
+            # Economic Value Added (EVA)
+            # Z-Score Analysis
+            # Monte Carlo simulations
         }
 
     def analyze_data(self):

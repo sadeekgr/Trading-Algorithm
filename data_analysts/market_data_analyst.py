@@ -23,6 +23,7 @@ class MarketDataAnalyst(DataAnalyst):
             'mean_absolute_deviation_from_linear_ROC': [12], # mean absolute deviation of ROC compared to its linear regression
             'support': [43, 177, 599], # strenght proportional to volume and difference between close and low, should divide price in bands whose width is 0.1% of curr price
             'resistance': [43, 177, 599], # strenght proportional to volume and difference between high and close, should divide price in bands whose width is 0.1% of curr price
+            # ADX
             # inclined support and resistance are caused by market orders (they are a 'perceived' resistance and support), horizontal are caused by limit orders (they usually represent 'actual' support and resistance, should be stronger as they might be bulk orders from companies)
             # price moves up / down while index does opposite
             # maybe consider with what angle the EMA intersects the RMAs
@@ -263,17 +264,17 @@ if __name__ == '__main__':
     fin.volume_ocv(volumes, ax=axv)
     #fin.plot(data['timestamp'], data['EMA_13'], ax=ax, color='#486c77', legend='EMA 13')
     #fin.plot(data['timestamp'], data['RMA_21'], ax=ax, color='#7297c4', legend='RMA 21')
-    #fin.plot(data['timestamp'], data['RMA_53'], ax=ax, color='#2a632e', legend='RMA 53')
+    fin.plot(data['timestamp'], data['RMA_53'], ax=ax, color='#2a632e', legend='RMA 53')
     #fin.plot(data['timestamp'], data['RMA_199'], ax=ax, color='#83222b', legend='RMA 199')
     #fin.plot(data['timestamp'], data['LOW_7'], ax=ax, legend='LOW 7')
     #fin.plot(data['timestamp'], data['LOW_43'], ax=ax, legend='LOW 43')
     #fin.plot(data['timestamp'], data['LOW_177'], ax=ax, legend='LOW 177')
     fin.plot(data['timestamp'], data['support_43'], ax=ax, legend='support 43')
     fin.plot(data['timestamp'], data['support_177'], ax=ax, legend='support 177')
-    fin.plot(data['timestamp'], data['support_599'], ax=ax, legend='support 599')
+    #fin.plot(data['timestamp'], data['support_599'], ax=ax, legend='support 599')
     fin.plot(data['timestamp'], data['resistance_43'], ax=ax, legend='resistance 43')
     fin.plot(data['timestamp'], data['resistance_177'], ax=ax, legend='resistance 177')
-    fin.plot(data['timestamp'], data['resistance_599'], ax=ax, legend='resistance 599')
+    #fin.plot(data['timestamp'], data['resistance_599'], ax=ax, legend='resistance 599')
     fin.plot(data['timestamp'], data['ROC_12'], ax=ax2, legend='ROC 12')
     fin.plot(data['timestamp'], data['mean_absolute_deviation_from_linear_ROC_12'], ax=ax2, legend='MAD from Linear ROC 12')
     #fin.plot(data['timestamp'], data['ROC_of_ROC_12'], ax=ax3, legend='ROC of ROC 12')

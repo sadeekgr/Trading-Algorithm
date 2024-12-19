@@ -10,9 +10,14 @@ class CountryDataAnalyst(DataAnalyst):
         self.indicators = {
             # exports / imports
             # resources
-            # working population
+            # employment rate
+            # population growth
+            # migration
             # development level (infrastructure)
             # ethnicity divisions
+            # global factors
+            # gdp
+            # measure of consumerism / hedonism ??? (or maybe richness and economical disparity?)
         }
         pass
 
