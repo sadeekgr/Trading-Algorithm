@@ -3,5 +3,10 @@ secret_codes = {
     "Alpaca API Key": "XXXX",
     "Alpaca API Secret Key": "XXXX",
     "TradingView username": "XXXX",
-    "TradingView password": "XXXX"
+    "TradingView password": "XXXX",
+    "PostgreSQL host": "XXXX",
+    "PostgreSQL username": "XXXX",
+    "PostgreSQL database": "XXXX",
+    "PostgreSQL password": "XXXX",
+    "PostgreSQL port": XXXX
 }
