@@ -47,9 +47,8 @@ class HistoricalMarketDataCollector(MarketDataCollector):
         super().__init__()
         self.tv = TvDatafeed(tv_username, tv_password)
         self.alpaca_historical_stock_client = StockHistoricalDataClient(ALPACA_API_KEY, ALPACA_API_SECRET_KEY)
-        # update_db?
+        # update db?
 
-        data_dict = super().fetch_data() # TO DO, include crypto historical data too
     def fetch_historical_data_default(self, symbol, exchange):
         data = pd.DataFrame()
         try:  # TO UPDATE, random days and periods hardcoded temporarily
@@ -57,15 +56,15 @@ class HistoricalMarketDataCollector(MarketDataCollector):
             start = end - pd.Timedelta(days=4)
             symbol_data = self.fetch_historical_data(symbol, exchange, interval=(1, "Min"), start=start, end=end)
             data = pd.concat([symbol_data, data], axis=0)
-            end = start
+            end = start - pd.Timedelta(minutes=1)
             start = end - pd.Timedelta(days=10)
             symbol_data = self.fetch_historical_data(symbol, exchange, interval=(1, "Hour"), start=start, end=end)
             data = pd.concat([symbol_data, data], axis=0)
-            end = start
+            end = start - pd.Timedelta(minutes=1)
             start = end - pd.Timedelta(days=360)
             symbol_data = self.fetch_historical_data(symbol, exchange, interval=(1, "Day"), start=start, end=end)
             data = pd.concat([symbol_data, data], axis=0)
-            end = start
+            end = start - pd.Timedelta(minutes=1)
             start = end - pd.Timedelta(days=360)
             symbol_data = self.fetch_historical_data(symbol, exchange, interval=(1, "Week"), start=start, end=end)
             data = pd.concat([symbol_data, data], axis=0)
@@ -73,8 +72,40 @@ class HistoricalMarketDataCollector(MarketDataCollector):
             pass
         return data
 
-    def fetch_historical_data(self, symbol, exchange, interval, start, end=pd.Timestamp.now()):  # TO UPDATE, add functionality to only get required data by checking the db
-        start
+    def fetch_historical_data(self, symbol, exchange, interval, start, end=pd.Timestamp.now()):# TO UPDATE, need aggregate historical_market_data
+        last_date_query = f"""
+            SELECT MAX(timestamp)
+            FROM historical_market_data
+            WHERE symbol = '{symbol}' AND exchange = '{exchange}';
+        """
+        first_date_query = f"""
+            SELECT MIN(timestamp)
+            FROM historical_market_data
+            WHERE symbol = '{symbol}' AND exchange = '{exchange}';
+        """
+        last_date_db = self.db_manager.execute(last_date_query).fetchall()[0][0]
+        first_date_db = self.db_manager.execute(first_date_query).fetchall()[0][0]
+        historical_market_data = pd.DataFrame()
+        # TO UPDATE, need aggregate historical_market_data if you inputted 3 Min, 4 Hours etc. instead of 1 Min, 1 Hour etc.
+        if last_date_db != None and last_date_db >= start >= first_date_db:
+            if end <= last_date_db:
+                load_db_query = f"""
+                    SELECT *
+                    FROM historical_market_data
+                    WHERE symbol = '{symbol}' AND exchange = '{exchange}' AND timestamp >= '{start}' AND timestamp <= '{end}';
+                """
+                historical_market_data = pd.read_sql(load_db_query, self.db_manager.connection)
+                historical_market_data.set_index(['symbol', 'exchange', 'timestamp'], inplace=True)
+                return historical_market_data
+            else:
+                load_db_query = f"""
+                    SELECT *
+                    FROM historical_market_data
+                    WHERE symbol = '{symbol}' AND exchange = '{exchange}' AND timestamp >= '{start}';
+                """
+                historical_market_data = pd.read_sql(load_db_query, self.db_manager.connection)
+                historical_market_data.set_index(['symbol', 'exchange', 'timestamp'], inplace=True)
+                start = last_date_db + pd.Timedelta(minutes=1)
         difference = end - start
         seconds_difference = difference.total_seconds()
         num_bars_needed = ceil(seconds_difference / (interval[0]*time_letter_to_seconds[interval[1]]))
@@ -106,18 +137,18 @@ class HistoricalMarketDataCollector(MarketDataCollector):
                 del historical_market_data_alpaca['vwap']
                 del historical_market_data_alpaca['trade_count']
                 historical_market_data_alpaca.index = historical_market_data_alpaca.index.droplevel('symbol')
-                # del historical_market_data_alpaca['symbol']?
                 historical_market_data_alpaca.index = historical_market_data_alpaca.index.tz_localize(None)
                 historical_market_data_alpaca.index.name = 'timestamp'
                 # TO UPDATE, need aggregate historical_market_data_alpaca if you inputted 3 Min, 4 Hours etc. instead of 1 Min, 1 Hour etc.
             except KeyError:
                 print(f"Alpaca does not support historical data of {symbol} in exchange {exchange}")
                 raise KeyError
-        historical_market_data = pd.concat([historical_market_data_alpaca, historical_market_data_tv], axis=0)
-        historical_market_data.reset_index(inplace=True)
-        historical_market_data['symbol'] = symbol
-        historical_market_data['exchange'] = exchange
-        historical_market_data.set_index(['symbol', 'exchange', 'timestamp'], inplace=True)
+        fetched_historical_market_data = pd.concat([historical_market_data_alpaca, historical_market_data_tv], axis=0)
+        fetched_historical_market_data.reset_index(inplace=True)
+        fetched_historical_market_data['symbol'] = symbol
+        fetched_historical_market_data['exchange'] = exchange
+        fetched_historical_market_data.set_index(['symbol', 'exchange', 'timestamp'], inplace=True)
+        historical_market_data = pd.concat([historical_market_data, fetched_historical_market_data], axis=0)
         return historical_market_data
 
     def save_data_csv(self, data):
